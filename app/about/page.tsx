@@ -20,7 +20,7 @@ const footerShuffleColors = [
 const images = [
   { src: '/vinit profile pic.jpg?height=300&width=300', alt: 'Photo 1' },
   { src: '/vinit profile picture.png?height=300&width=300', alt: 'Photo 2' },
-  { src: '/p2.avif?height=300&width=300', alt: 'Photo 3' },
+  { src: '/Profile.jpg?height=300&width=300', alt: 'Photo 3' },
   { src: '/p4.avif?height=300&width=300', alt: 'Photo 4' },
   { src: '/p5.avif?height=300&width=300', alt: 'Photo 5' },
 ]
@@ -125,7 +125,7 @@ export default function AboutPage() {
         <p className="text-2xl text-center font-bold">
           <span className="text-red-500">EAT</span>,{' '}
           <span className="text-yellow-400">SLEEP</span>,{' '}
-          <span className="text-green-400">EXPERIMENT</span>,{' '}
+          <span className="text-green-400">BADMINTON</span>,{' '}
           <span className="text-blue-400">REPEAT</span>
         </p>
       </div>

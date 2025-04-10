@@ -3,27 +3,27 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Forward } from 'lucide-react';
 import { ArrowUpRight } from 'lucide-react';
-
 import { CustomCursor } from '@/app/components/CustomCursor';
 import { ScrollIndicator } from '@/app/components/ScrollIndicator';
 
-interface ProjectPageProps {
-  params: {
-    slug: string
-  }
-}
 
-export default function ProjectPage({ params }: ProjectPageProps) {
+
+export default function ProjectPage() {
+  // In a real app, you'd fetch this data based on the slug
   const project = {
     title: "Slack - Server-Rendered Blog with Enhanced Content Authoring",
     description: "A performant and flexible blog platform built with Next.js and MDX for seamless integration of code and content.",
     tags: ["Next.js", "Content Creation", "MDX"],
     image: "/slack gray.png",
-    content: "Developed a dynamic blog website using Next.js for server-side rendering and React for the frontend. Leveraged MDX to seamlessly integrate content and code within blog posts. Utilized Node.js to build a robust backend for content management and storage.",
+    content: "A high-performance, server-rendered blog using Next.js and MDX to provide an enhanced content creation experience.",
     year: "2023"
   };
 
   return (
+
+  
+
+ 
     <>
       <CustomCursor />
       <ScrollIndicator />

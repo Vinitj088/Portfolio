@@ -4,18 +4,15 @@ import { ArrowLeft } from 'lucide-react';
 import { CustomCursor } from '@/app/components/CustomCursor';
 import { ScrollIndicator } from '@/app/components/ScrollIndicator';
 import { Forward } from 'lucide-react';
-import { ArrowUpRight } from 'lucide-react';interface ProjectPageProps {
-  params: {
-    slug: string
-  }
-}
+import { ArrowUpRight } from 'lucide-react';
 
-export default function ProjectPage({ params }: ProjectPageProps) {
+
+export default function ProjectPage() {
   const project = {
-    title: "ToastER - An AI-Powered Text to Slang Converter",
-    description: "Launched a product, matching founders with potential cofounders",
+    title: "Translatr - An AI-Powered Text to Slang Converter",
+    description: "Created a web application using Next.js and React to convert text into Gen Z slang. Integrated the OpenAI API to generate creative and humorous translations, enhancing user interaction and engagement.",
     tags: ["OpenAI API", "React", "NextJS"],
-    image: "/toaster green.png",
+    image: "/translatr_purple.png",
     content: "Created a web application using Next.js and React to convert text into Gen Z slang. Integrated the OpenAI API to generate creative and humorous translations, enhancing user interaction and engagement.",
     year: "2024 - Current"
   };
@@ -70,7 +67,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
           {/* {link to the project} */}
           <div className="mb-8">
-              <Link href="https://toast-er.vercel.app/translator" className="inline-flex items-center text-cyan-300 hover:text-white text-semibold transition-colors mb-4 mt-4">
+              <Link href="https://translatr.vercel.app/" className="inline-flex items-center text-cyan-300 hover:text-white text-semibold transition-colors mb-4 mt-4">
                 <Forward className="w-4 h-4 mr-2" />
                   Link to Deployed Project 
                   <ArrowUpRight className="w-4 h-4 ml-2" />

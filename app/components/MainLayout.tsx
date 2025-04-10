@@ -91,7 +91,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
               </Link>
             </li>
             <li>
-              <Link href="https://drive.google.com/file/d/1iL7nblvckETQk1zsgmq7jbA0CDQl-Nln/view?usp=sharing" className="flex items-center gap-3 text-[#ffffff] hover:text-[#ADFF00]/80">
+              <Link href="https://drive.google.com/file/d/1O2WVXS4H8nY6h913L0Z3t2iuqwoqS5aS/view?usp=sharing" className="flex items-center gap-3 text-[#ffffff] hover:text-[#ADFF00]/80">
                 <BookAIcon size={20} />
                 <span>Resume</span>
               </Link>
@@ -147,7 +147,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           </Link>
           
           <Link 
-            href="https://drive.google.com/file/d/1iL7nblvckETQk1zsgmq7jbA0CDQl-Nln/view?usp=sharing"
+            href="https://drive.google.com/file/d/1O2WVXS4H8nY6h913L0Z3t2iuqwoqS5aS/view?usp=sharing"
             className="flex flex-col items-center text-zinc-400"
           >
             <BookAIcon size={20} />

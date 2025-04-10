@@ -1,26 +1,40 @@
-
 import Link from 'next/link';
 import React from 'react';
 
 const ProjectGrid = () => {
   const projects = [
+    // 1. Exachat
+    {
+      title: "Exa Answer Chat App", // From README
+      description: "The FASTEST open source chat app showcasing Exa's Answer endpoint, leveraging Groq, Gemini, Openrouter and Exa Search for speed and access to cutting-edge LLMs and latest data.", // From README
+      tags: ["Exa API", "Groq", "Next.js", "Supabase", "Redis", "TailwindCSS", "TypeScript"], // From README Tech Stack
+      image: "/exachat.png", // Keep existing image
+      slug: "exachat" // Keep existing slug
+    },
+    // 2. Displayr
+    {
+      title: "Displayr - Trending Movies Finder", // Based on description
+      description: "A visually engaging and responsive app to discover daily trending movies, similar to IMDb popular lists, featuring a dynamic UI and background that adapts to movie colors. Uses the TMDB API.", // Replaced 'aesthetic' with 'visually engaging'
+      tags: ["TMDB API", "Next.js", "React", "TailwindCSS", "Dynamic UI"], // Based on description & assumptions
+      image: "/displayr.png", // Keep existing image
+      slug: "displayr" // Keep existing slug
+    },
+    // 3. Slack
     {
       title: "Slack - Server-Rendered Blog with Enhanced Content Authoring",
       description: "A performant and flexible blog platform built with Next.js and MDX for seamless integration of code and content.",
       tags: ["Next.js", "Content Creation", "MDX"],
-      image: "/slack gray.png"  // Replace with your actual image path
-      , 
+      image: "/slack gray.png",  // Replace with your actual image path
       slug: "slack"
     },
+    // 4. Toaster
     {
       title: "ToastER - An AI-Powered Text to Slang Converter",
-      description: "Launched a product, matching founders with potential cofounders",
+      description: "Created a web application using Next.js and React to convert text into Gen Z slang. Integrated the OpenAI API to generate creative and humorous translations, enhancing user interaction and engagement.",
       tags: ["OpenAI API", "React", "NextJS"],
-      image: "/toaster green.png"  // Replace with your actual image path
-      , 
+      image: "/translatr_purple.png",  // Replace with your actual image path
       slug: "toaster"
-    },
-    // Add more projects as needed
+    }
   ];
 
   return (

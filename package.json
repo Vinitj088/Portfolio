@@ -6,10 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build",
+    "deploy": "next build && firebase deploy"
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "firebase": "^11.1.0",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.460.0",
     "next": "15.0.3",
