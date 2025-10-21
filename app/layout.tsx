@@ -8,6 +8,11 @@ const caveat = Caveat({
   variable: '--font-caveat',
 })
 
+export const metadata = {
+  title: 'Vinit Jain',
+  description: 'Vinit Jain is a fullstack developer who loves to experiment and try new things',
+}
+
 export default function RootLayout({
   children,
 }: {
