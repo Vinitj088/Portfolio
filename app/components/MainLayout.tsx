@@ -9,6 +9,9 @@ import { GreetingText } from './GreetingText';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
+// Get resume URL from environment variable
+const RESUME_URL = process.env.NEXT_PUBLIC_RESUME_URL || '#';
+
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const scrollPercentage = useScroll();
@@ -116,7 +119,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
               </Link>
             </li>
             <li>
-              <Link href="https://drive.google.com/file/d/1O2WVXS4H8nY6h913L0Z3t2iuqwoqS5aS/view?usp=sharing" className="flex items-center gap-3 text-foreground hover:text-foreground/60 transition-colors font-light py-2">
+              <Link href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-foreground hover:text-foreground/60 transition-colors font-light py-2">
                 <BookAIcon size={18} />
                 <span>Resume</span>
               </Link>
@@ -172,7 +175,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           </Link>
 
           <Link
-            href="https://drive.google.com/file/d/1O2WVXS4H8nY6h913L0Z3t2iuqwoqS5aS/view?usp=sharing"
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex flex-col items-center text-muted-foreground transition-colors"
           >
             <BookAIcon size={18} />
