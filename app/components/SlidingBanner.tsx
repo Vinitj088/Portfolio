@@ -7,13 +7,13 @@ const SlidingBanner = () => {
 ];
   
   return (
-    <div className="relative w-full overflow-hidden bg-[#141414] py-8">
+    <div className="relative w-full overflow-hidden bg-background py-10 border-y border-border">
       {/* Gradient overlay - left side */}
-      <div className="absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-[#141414] to-transparent" />
-      
+      <div className="absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-background to-transparent" />
+
       {/* Gradient overlay - right side */}
-      <div className="absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-[#141414] to-transparent" />
-      
+      <div className="absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-background to-transparent" />
+
       {/* Sliding container */}
       <motion.div
         className="flex whitespace-nowrap"
@@ -30,7 +30,7 @@ const SlidingBanner = () => {
         {[...words, ...words].map((word, index) => (
           <div
             key={index}
-            className="mx-8 text-lg font-bold text-neutral-400 opacity-80"
+            className="mx-8 text-lg font-light text-muted-foreground"
           >
             {word}
           </div>

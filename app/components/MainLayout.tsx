@@ -7,16 +7,19 @@ import { useScroll } from '@/app/hooks/usescroll';
 import { CustomCursor } from './CustomCursor';
 import { GreetingText } from './GreetingText';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const scrollPercentage = useScroll();
   const [currentPath, setCurrentPath] = useState("/");
-  
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
   useEffect(() => {
     // Update currentPath when the component mounts and when the URL changes
     setCurrentPath(window.location.pathname);
-    
+
     const handleRouteChange = () => {
       setCurrentPath(window.location.pathname);
     };
@@ -24,75 +27,97 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     window.addEventListener('popstate', handleRouteChange);
     return () => window.removeEventListener('popstate', handleRouteChange);
   }, []);
+
+  useEffect(() => {
+    // Check if desktop and trigger sidebar animation only on desktop
+    const checkDesktop = () => {
+      const isLargeScreen = window.innerWidth >= 1024;
+      setIsDesktop(isLargeScreen);
+      if (isLargeScreen) {
+        setSidebarVisible(true);
+      }
+    };
+
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
   
   return (
     <>
       <CustomCursor />
       
       {/* Scroll Indicator */}
-      <div className="fixed top-4 right-4 bg-black/50 px-3 py-1 rounded-md text-sm text-zinc-400 backdrop-blur-sm z-50">
-        scroll: {scrollPercentage}%
+      <div className="fixed top-6 right-6 bg-secondary/80 px-3 py-1.5 rounded-full text-sm text-muted-foreground backdrop-blur-sm z-50 border border-border">
+        {scrollPercentage}%
       </div>
 
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 bg-zinc-900/50 backdrop-blur-sm p-4 z-40">
+      <div className="lg:hidden fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-md p-4 z-40 border-b border-border">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden">
+            <div className="relative w-10 h-10 rounded-full overflow-hidden ring-1 ring-border">
               <img
                 src="/pp.png"
                 alt="Profile"
-                className="rounded-full"
+                className="rounded-full object-cover"
               />
             </div>
             <div>
-              <h3 className="font-semibold">Vinit Jain</h3>
-              <p className="text-sm text-zinc-400">Developer</p>
+              <h3 className="font-normal text-foreground">Vinit Jain</h3>
+              <p className="text-sm text-muted-foreground font-light">Developer</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Sidebar - Floating Style */}
-      <div className={cn(
-        "fixed lg:left-8 lg:top-8 lg:bottom-8 w-64 bg-[#211F1F] backdrop-blur-sm rounded-lg p-6 flex flex-col transition-transform duration-300 z-30",
-        "lg:translate-x-0",
-        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full",
-        "lg:h-[calc(100vh-4rem)]"
-      )}>
+      <motion.div
+        initial={false}
+        animate={
+          isDesktop
+            ? { x: sidebarVisible ? 0 : -300, opacity: sidebarVisible ? 1 : 0 }
+            : { x: isMobileMenuOpen ? 0 : -300, opacity: 1 }
+        }
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={cn(
+          "fixed left-0 top-0 bottom-0 lg:left-8 lg:top-8 lg:bottom-8 w-64 bg-card backdrop-blur-sm lg:rounded-2xl p-6 flex flex-col z-30 border-r lg:border border-border lg:shadow-sm",
+          "lg:h-[calc(100vh-4rem)]"
+        )}
+      >
         {/* Profile Section - Hidden on Mobile */}
-        <div className="hidden lg:flex items-center gap-3 mb-8">
-          <div className="relative w-12 h-12 rounded-full overflow-hidden">
+        <div className="hidden lg:flex items-center gap-3 mb-10">
+          <div className="relative w-12 h-12 rounded-full overflow-hidden ring-1 ring-border">
             <img
               src="/pp.png"
               alt="Profile"
-              className="rounded-full"
+              className="rounded-full object-cover"
             />
           </div>
           <div>
-            <h3 className="font-semibold">Vinit Jain</h3>
-            <p className="text-sm text-zinc-400">Developer</p>
+            <h3 className="font-normal text-foreground">Vinit Jain</h3>
+            <p className="text-sm text-muted-foreground font-light">Developer</p>
           </div>
         </div>
 
         {/* Navigation Menu */}
         <nav className="flex-1">
-          <ul className="space-y-5">
+          <ul className="space-y-3">
             <li>
-              <Link href="/" className="flex items-center gap-3 text-[#ffffff] hover:text-[#ADFF00]/80">
-                <Compass size={20} />
+              <Link href="/" className="flex items-center gap-3 text-foreground hover:text-foreground/60 transition-colors font-light py-2">
+                <Compass size={18} />
                 <span>Explore</span>
               </Link>
             </li>
             <li>
-              <Link href="/about" className="flex items-center gap-3 text-[#ffffff] hover:text-[#ADFF00]/80">
-                <UserCircle size={20} />
+              <Link href="/about" className="flex items-center gap-3 text-foreground hover:text-foreground/60 transition-colors font-light py-2">
+                <UserCircle size={18} />
                 <span>About me</span>
               </Link>
             </li>
             <li>
-              <Link href="https://drive.google.com/file/d/1O2WVXS4H8nY6h913L0Z3t2iuqwoqS5aS/view?usp=sharing" className="flex items-center gap-3 text-[#ffffff] hover:text-[#ADFF00]/80">
-                <BookAIcon size={20} />
+              <Link href="https://drive.google.com/file/d/1O2WVXS4H8nY6h913L0Z3t2iuqwoqS5aS/view?usp=sharing" className="flex items-center gap-3 text-foreground hover:text-foreground/60 transition-colors font-light py-2">
+                <BookAIcon size={18} />
                 <span>Resume</span>
               </Link>
             </li>
@@ -100,17 +125,17 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         </nav>
 
         {/* Social Links */}
-        <div className="space-y-4">
-          <Link href="https://www.linkedin.com/in/vinit-j-2400a7246/" className="flex items-center gap-3 text-zinc-400 hover:text-white">
-            <Linkedin size={20} />
+        <div className="space-y-3 pt-6 border-t border-border">
+          <Link href="https://www.linkedin.com/in/vinit-j-2400a7246/" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors font-light py-1.5">
+            <Linkedin size={18} />
             <span>LinkedIn</span>
           </Link>
-          <Link href="https://github.com/Vinitj088" className="flex items-center gap-3 text-zinc-400 hover:text-white">
-            <Github size={20} />
+          <Link href="https://github.com/Vinitj088" className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors font-light py-1.5">
+            <Github size={18} />
             <span>Github</span>
           </Link>
         </div>
-      </div>  
+      </motion.div>  
 
       {/* Main Content */}
       <main className="lg:ml-80 flex-1 p-8 pt-24 lg:pt-8  pb-24 lg:pb-8">
@@ -120,46 +145,46 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       </main>
 
       {/* Mobile Footer Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#211F1F] lg:hidden z-40">
+      <div className="fixed bottom-0 left-0 right-0 bg-card/80 backdrop-blur-md lg:hidden z-40 border-t border-border">
         <nav className="flex justify-around items-center h-16 px-4">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className={cn(
-              "flex flex-col items-center",
-              currentPath === "/" ? "text-[#ADFF00]" : "text-zinc-400"
+              "flex flex-col items-center transition-colors",
+              currentPath === "/" ? "text-foreground" : "text-muted-foreground"
             )}
             onClick={() => setCurrentPath("/")}
           >
-            <Compass size={20} />
-            <span className="text-xs mt-1">Explore</span>
+            <Compass size={18} />
+            <span className="text-xs mt-1 font-light">Explore</span>
           </Link>
-          
-          <Link 
+
+          <Link
             href="/about"
             className={cn(
-              "flex flex-col items-center",
-              currentPath === "/about" ? "text-[#ADFF00]" : "text-zinc-400"
+              "flex flex-col items-center transition-colors",
+              currentPath === "/about" ? "text-foreground" : "text-muted-foreground"
             )}
             onClick={() => setCurrentPath("/about")}
           >
-            <UserCircle size={20} />
-            <span className="text-xs mt-1">About</span>
+            <UserCircle size={18} />
+            <span className="text-xs mt-1 font-light">About</span>
           </Link>
-          
-          <Link 
+
+          <Link
             href="https://drive.google.com/file/d/1O2WVXS4H8nY6h913L0Z3t2iuqwoqS5aS/view?usp=sharing"
-            className="flex flex-col items-center text-zinc-400"
+            className="flex flex-col items-center text-muted-foreground transition-colors"
           >
-            <BookAIcon size={20} />
-            <span className="text-xs mt-1">Resume</span>
+            <BookAIcon size={18} />
+            <span className="text-xs mt-1 font-light">Resume</span>
           </Link>
-          
-          <Link 
+
+          <Link
             href="https://github.com/Vinitj088"
-            className="flex flex-col items-center text-zinc-400"
+            className="flex flex-col items-center text-muted-foreground transition-colors"
           >
-            <Github size={20} />
-            <span className="text-xs mt-1">Github</span>
+            <Github size={18} />
+            <span className="text-xs mt-1 font-light">Github</span>
           </Link>
         </nav>
       </div>

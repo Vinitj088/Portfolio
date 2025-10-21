@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import MainLayout from '../components/MainLayout'
 import { ShuffleText } from '../components/ShuffleText'
+import { FadeIn } from '../components/FadeIn'
+import { Card, CardContent } from '@/components/ui/card'
+import ImageReveal from '../components/ImageReveal'
 
 const footerShuffleTexts = [
   "maker",
@@ -21,8 +24,6 @@ const images = [
   { src: '/vinit profile pic.jpg?height=300&width=300', alt: 'Photo 1' },
   { src: '/vinit profile picture.png?height=300&width=300', alt: 'Photo 2' },
   { src: '/Profile.jpg?height=300&width=300', alt: 'Photo 3' },
-  { src: '/p4.avif?height=300&width=300', alt: 'Photo 4' },
-  { src: '/p5.avif?height=300&width=300', alt: 'Photo 5' },
 ]
 
 export default function AboutPage() {
@@ -48,98 +49,132 @@ export default function AboutPage() {
   }, [isMobile])
 
   const content = (
-    <div className="max-w-4xl mx-auto py-12 px-4 md:pt-24">
+    <div className="max-w-4xl mx-auto py-12 px-6 md:pt-24 space-y-24">
       {/* Hero Section */}
-      <div className="space-y-6 mb-16">
-        <h1 className="text-5xl md:text-6xl font-bold">
-          Hello, I'm <span className="font-caveat italic">Vinit :)</span> 
-        </h1>
-        <p className="text-xl text-zinc-300">
-          A little about me ~ I'm Vinit, a web developer originally from India, currently embracing the beautiful city of Udaipur, Rajasthan – often called the "City of Lakes." 🌊
-        </p>
-      </div>
+      <FadeIn delay={0.1}>
+        <div className="space-y-8">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-foreground leading-tight">
+            Hello, I'm <span className="italic font-extralight text-6xl md:text-7xl lg:text-8xl">Vinit :)</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-muted-foreground font-geist font-light leading-relaxed max-w-3xl">
+            A web developer from India, currently in the beautiful city of Udaipur, Rajasthan – the "City of Lakes."
+          </p>
+          <div className="flex gap-2 items-center text-sm text-muted-foreground font-light">
+            <div className="w-2 h-2 rounded-full bg-green-500"></div>
+            <span>Available for freelance work</span>
+          </div>
+        </div>
+      </FadeIn>
 
       {/* Photo Gallery */}
-      <div className="relative h-[300px] md:h-[400px] mb-16">
-        {isMobile ? (
-          <div className="mx-auto w-full h-full rounded-2xl overflow-hidden shadow-xl ">
-            <Image className=' border-white border-4 rounded-2xl'
-              src={images[currentImageIndex].src}
-              alt={images[currentImageIndex].alt}
+      <FadeIn delay={0.2}>
+        <div className="relative h-[300px] md:h-[450px] flex items-center justify-center">
+          {isMobile ? (
+            <div className="h-full w-full overflow-hidden rounded-xl bg-white p-3 shadow-sm">
+              <div className="relative w-full h-full rounded-lg overflow-hidden">
+                <Image
+                  src={images[currentImageIndex].src}
+                  alt={images[currentImageIndex].alt}
+                  fill
+                  className="rounded-lg object-cover"
+                />
+              </div>
+            </div>
+          ) : (
+            <ImageReveal
+              leftImage={images[0].src}
+              middleImage={images[1].src}
+              rightImage={images[2].src}
+            />
+          )}
+        </div>
+      </FadeIn>
+
+      {/* About Content Grid */}
+      <div className="grid md:grid-cols-2 gap-16">
+        <FadeIn delay={0.1}>
+          <div className="space-y-6">
+            <h2 className="text-3xl font-light text-foreground">My Journey</h2>
+            <div className="space-y-4 text-muted-foreground font-geist font-light leading-relaxed text-lg">
+              <p>
+                My journey into web development has been a fascinating blend of exploration and learning. I've always been drawn to the creative and problem-solving aspects of building digital experiences.
+              </p>
+              <p>
+                From managing WordPress sites to diving into modern full-stack technologies, I've steadily built expertise in crafting user-friendly and performant web applications.
+              </p>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <div className="space-y-6">
+            <h2 className="text-3xl font-light text-foreground">Beyond Code</h2>
+            <div className="space-y-4 text-muted-foreground font-geist font-light leading-relaxed text-lg">
+              <p>
+                Outside of coding, I enjoy a variety of activities that help me recharge and stay inspired. I'm a big fan of movies and documentaries 🎬, always eager to explore new stories and perspectives.
+              </p>
+              <p>
+                I have a strong curiosity for trying new things, whether it's exploring a new cuisine, learning a new skill, or venturing out to discover new places.
+              </p>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+
+      {/* Skills Section */}
+      <FadeIn delay={0.1}>
+        <div className="space-y-8">
+          <h2 className="text-3xl font-light text-foreground">What I Do</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {['Frontend Development', 'Backend Architecture', 'UI/UX Design', 'Database Design', 'API Integration', 'Performance Optimization'].map((skill, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+                <CardContent className="p-6">
+                  <p className="font-light text-foreground">{skill}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </FadeIn>
+
+      {/* Passion Section */}
+      <FadeIn delay={0.1}>
+        <div className="overflow-hidden rounded-xl bg-white p-3 shadow-sm">
+          <div className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
+            <Image
+              src="/badminton.avif"
+              alt="badminton close-up shot"
               layout="fill"
               objectFit="cover"
+              className="rounded-lg"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+              <div className="space-y-2">
+                <h2 className="text-3xl md:text-4xl font-light text-white">When I'm Not Coding...</h2>
+                <p className="text-xl text-white/90 font-geist font-light">
+                  You'll find me on the badminton court
+                </p>
+              </div>
+            </div>
           </div>
-        ) : (
-          images.map((image, index) => (
-            <div
-              key={index}
-              className={` border-white border-8 absolute w-[250px] h-[250px] transition-all duration-300 rounded-2xl overflow-hidden shadow-xl hover:z-10`}
-              style={{
-                left: `${index * 20}%`,
-                transform: `rotate(${(index - 2) * 4}deg)`,
-              }}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-300 hover:scale-110"
+        </div>
+      </FadeIn>
+
+      {/* Footer */}
+      <FadeIn delay={0.1}>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex flex-col justify-between items-center text-sm text-muted-foreground font-light sm:flex-row gap-4">
+              <span>2024 © Fueled by coffee and curiosity</span>
+              <ShuffleText
+                texts={footerShuffleTexts}
+                colors={footerShuffleColors}
+                className="text-foreground font-normal py-1"
               />
             </div>
-          ))
-        )}
-      </div>
-
-      {/* Notes Section */}
-      <div className="w-full max-w-3xl mx-auto p-8 bg-[#1f1f1f] text-white xl:ml-20">
-
-        <h2 className="text-2xl font-semibold mb-8">Notes ( My Story )</h2>
-        <div className="space-y-6 text-zinc-300">
-          <p>
-          My journey into web development has been a fascinating blend of exploration and learning. I've always been drawn to the creative and problem-solving aspects of building digital experiences. From managing WordPress sites and diving into front-end development, I've steadily built a solid foundation in full-stack technologies. 
-          </p>
-          <p>
-          My passion lies in crafting user-friendly and performant web applications that not only look great but also provide seamless functionality.
-          </p>
-          <p>
-          Outside of coding, I enjoy a variety of activities that help me recharge and stay inspired. I'm a big fan of movies and documentaries 🎬, always eager to explore new stories and perspectives. I also have a strong curiosity for trying new things, whether it's exploring a new cuisine, learning a new skill, or simply venturing out to discover new places.
-          </p>
-        </div>
-
-        
-      </div>
-       {/* When I am not designing Section */}
-       <div className="w-full max-w-3xl mx-auto p-8 space-y-6 mb-16 mt-16">
-        <h2 className="text-3xl font-bold">When I am not designing...</h2>
-        <div className="rounded-2xl overflow-hidden">
-          <Image
-            src="/badminton.avif"
-            alt="badminton close-up shot"
-            width={1200}
-            height={600}
-            className="w-full object-cover"
-          />
-        </div>
-        <p className="text-2xl text-center font-bold">
-          <span className="text-red-500">EAT</span>,{' '}
-          <span className="text-yellow-400">SLEEP</span>,{' '}
-          <span className="text-green-400">BADMINTON</span>,{' '}
-          <span className="text-blue-400">REPEAT</span>
-        </p>
-      </div>
-
-      {/* Footer */}  
-      <div className="mt-20 py-6 px-0 bg-[#1f1f1f] rounded-lg sm:!px-8">
-        <div className="flex flex-col justify-between items-center text-sm text-zinc-400 sm:flex-row">
-          <span>2024 @ Caffine hits hard</span>
-          <ShuffleText 
-          texts={footerShuffleTexts} 
-          colors={footerShuffleColors}
-          className="text-purple-400 font-bold py-1" />
-        </div>
-      </div>
+          </CardContent>
+        </Card>
+      </FadeIn>
   
 
       

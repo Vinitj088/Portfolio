@@ -1,95 +1,127 @@
 import Link from 'next/link';
 import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { FadeIn } from './FadeIn';
 
 const ProjectGrid = () => {
   const projects = [
-    // 1. Exachat
+    // 1. AyleChat
     {
-      title: "Exa Answer Chat App", // From README
-      description: "The FASTEST open source chat app showcasing Exa's Answer endpoint, leveraging Groq, Gemini, Openrouter and Exa Search for speed and access to cutting-edge LLMs and latest data.", // From README
-      tags: ["Exa API", "Groq", "Next.js", "Supabase", "Redis", "TailwindCSS", "TypeScript"], // From README Tech Stack
-      image: "/exachat.png", // Keep existing image
-      slug: "exachat" // Keep existing slug
+      title: "AyleChat - Multi-Provider AI Chat App",
+      description: "An open-source AI chat application providing unparalleled speed and immediate access to cutting-edge LLMs through multi-provider support including Google Gemini, Groq, OpenRouter, Cerebras, and Exa.",
+      tags: ["Next.js 15", "InstantDB", "Gemini", "Groq", "TypeScript", "shadcn/ui"],
+      image: "/aylechat.png",
+      slug: "aylechat"
     },
-    // 2. Displayr
+    // 2. LumenFX
     {
-      title: "Displayr - Trending Movies Finder", // Based on description
-      description: "A visually engaging and responsive app to discover daily trending movies, similar to IMDb popular lists, featuring a dynamic UI and background that adapts to movie colors. Uses the TMDB API.", // Replaced 'aesthetic' with 'visually engaging'
-      tags: ["TMDB API", "Next.js", "React", "TailwindCSS", "Dynamic UI"], // Based on description & assumptions
-      image: "/displayr.png", // Keep existing image
-      slug: "displayr" // Keep existing slug
+      title: "LumenFX - Cross-Border FX Payments [Hackathon Winner]",
+      description: "Smart route optimization platform for transparent, cost-effective international payments on Stellar blockchain. Won 0xGenIgnite hackathon at NIT Goa (Oct 2025).",
+      tags: ["Stellar", "Soroban", "Next.js 15", "Rust", "TypeScript"],
+      image: "/lumenfx.png",
+      slug: "lumenfx"
     },
-    // 3. Slack
+    // 3. TranslatR
     {
-      title: "Slack - Server-Rendered Blog with Enhanced Content Authoring",
-      description: "A performant and flexible blog platform built with Next.js and MDX for seamless integration of code and content.",
-      tags: ["Next.js", "Content Creation", "MDX"],
-      image: "/slack gray.png",  // Replace with your actual image path
-      slug: "slack"
-    },
-    // 4. Toaster
-    {
-      title: "ToastER - An AI-Powered Text to Slang Converter",
-      description: "Created a web application using Next.js and React to convert text into Gen Z slang. Integrated the OpenAI API to generate creative and humorous translations, enhancing user interaction and engagement.",
-      tags: ["OpenAI API", "React", "NextJS"],
-      image: "/translatr_purple.png",  // Replace with your actual image path
+      title: "TranslatR - Text to Internet Slang Converter",
+      description: "A modern web application that transforms regular text into various internet slang intensities with AI-powered conversions, smooth GSAP animations, and five intensity levels from Mild to Crazy.",
+      tags: ["Google Gemini API", "Next.js 15", "GSAP", "TypeScript", "TailwindCSS"],
+      image: "/translatr_purple.png",
       slug: "toaster"
+    },
+    // 4. Sahayak
+    {
+      title: "Sahayak - AI Mental Wellness Assistant",
+      description: "A culturally-sensitive AI companion for Indian youth (16-25) providing confidential, empathetic mental health support with crisis detection, mood tracking, and culturally adapted responses. Selected for Google Hackathon.",
+      tags: ["Next.js 14", "Google AI", "Vercel AI SDK", "TypeScript", "Framer Motion"],
+      image: "/sahayak.png",
+      slug: "sahayak"
+    },
+    // 5. Displayr
+    {
+      title: "Displayr - Movie & TV Show Discovery",
+      description: "A modern recommendation engine and search interface leveraging TMDB API data with genre-based filtering, GSAP animations, and comprehensive details including cast, crew, and trailers.",
+      tags: ["TMDB API", "Next.js", "TypeScript", "GSAP", "TailwindCSS"],
+      image: "/displayr.png",
+      slug: "displayr"
+    },
+    // 6. Whisperwalls
+    {
+      title: "Whisperwalls - Public Pin Sharing",
+      description: "Public pin sharing platform with AI-powered content moderation using Google Gemini API. Built for Thrizll hackathon with multi-language support for English and Hindi.",
+      tags: ["Next.js", "Gemini API", "Supabase", "TypeScript"],
+      slug: "whisperwalls"
+    },
+    // 7. DataWipe-Core
+    {
+      title: "DataWipe-Core - Disk Sanitization",
+      description: "NIST 800-88 compliant disk sanitization system for SIH 2025. First project working on OS-level architecture with cryptographic erase support for SSDs.",
+      tags: ["Python", "OS-Level", "Security", "NIST 800-88"],
+      slug: "datawipe"
     }
   ];
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-8 bg-[#141414] text-white xl:ml-20">
-      {/* Section Title */} 
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold text-white mb-4">Work</h2>
-        <div className="w-full h-px bg-neutral-800" />
+    <div className="w-full max-w-4xl mx-auto px-6 py-16 xl:ml-20">
+      {/* Section Title */}
+      <div className="mb-16">
+        <h2 className="text-3xl font-light text-foreground mb-6">Selected Work</h2>
+        <div className="w-full h-px bg-border" />
       </div>
 
       {/* Projects Grid */}
-      <div className="space-y-24">
+      <div className="space-y-20">
         {projects.map((project, index) => (
-          <div key={index} className="space-y-6">
-            {/* Project Title */}
-            <Link 
-              href={`/projects/${project.slug}`}
-              className="block group"
-            >
-            <h3 className="text-xl font-semibold text-white">
-              {project.title}
-            </h3>
-            </Link>
+          <FadeIn key={index} delay={index * 0.1}>
+            <div className="space-y-6">
+              {/* Project Title */}
+              <Link
+                href={`/projects/${project.slug}`}
+                className="block group"
+              >
+                <h3 className="text-2xl font-normal text-foreground group-hover:text-foreground/60 transition-colors">
+                  {project.title}
+                </h3>
+              </Link>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag, tagIndex) => (
-                <span
-                  key={tagIndex}
-                  className="px-4 py-1.5 bg-neutral-800 text-neutral-400 rounded-md text-sm"
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag, tagIndex) => (
+                  <Badge
+                    key={tagIndex}
+                    variant="outline"
+                    className="font-light"
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+
+              {/* Project Image Card */}
+              {project.image && (
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="block group"
                 >
-                  {tag}
-                </span>
-              ))}
-            </div>
+                  <div className="overflow-hidden rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                    <div className="relative w-full overflow-hidden rounded-lg">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-auto object-cover rounded-lg transition-transform duration-300 group-hover:scale-[1.02]"
+                      />
+                    </div>
+                  </div>
+                </Link>
+              )}
 
-            {/* Project Image */}
-            <Link 
-              href={`/projects/${project.slug}`}
-              className="block relative w-full overflow-hidden rounded-2xl bg-purple-600 group"
-            >
-            <div className="relative w-full overflow-hidden rounded-2xl bg-purple-600">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-auto object-cover"
-              />
+              {/* Project Description */}
+              <p className="text-muted-foreground font-geist font-light leading-relaxed">
+                {project.description}
+              </p>
             </div>
-            </Link>
-
-            {/* Project Description */}
-            <p className="text-neutral-400">
-              {project.description}
-            </p>
-          </div>
+          </FadeIn>
         ))}
       </div>
     </div>
